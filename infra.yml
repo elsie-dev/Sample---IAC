@@ -128,7 +128,7 @@ Resources:
             Tags: 
                 - Key: Name 
                   Value: !Sub ${EnvironmentName} Public Routes
-# creating the route table for our subnets
+# creating the route table for subnets
     DefaultPublicRoute: 
         Type: AWS::EC2::Route
         DependsOn: InternetGatewayAttachment
@@ -191,5 +191,44 @@ Resources:
         Properties:
             RouteTableId: !Ref PrivateRouteTable2
             SubnetId: !Ref PrivateSubnet2
+            
+        #Cloud Watch Alarm to monitor perfomance
+        Type: AWS::CloudWatch::Alarm
+        Properties: 
+         ActionsEnabled: Boolean
+         AlarmActions:
+            - String
+         AlarmDescription: String
+         AlarmName: String
+         ComparisonOperator: String
+         DatapointsToAlarm: Integer
+         Dimensions: 
+            - Dimension
+    
+         EvaluateLowSampleCountPercentile: String
+         EvaluationPeriods: Integer
+         ExtendedStatistic: String
+         InsufficientDataActions: 
+             - String
+   
+         MetricName: String
+         Metrics:
+            - MetricDataQuery
+    
+         Namespace: String
+         OKActions:
+            - String
+    
+         Period: Integer
+         Statistic: String
+         Threshold: Double
+         ThresholdMetricId: String
+         TreatMissingData: String
+         Unit: String
+
+ 
+
+
+
         
                 
