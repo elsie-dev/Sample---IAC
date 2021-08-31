@@ -10,6 +10,12 @@ Parameters:
         Type: String
         Default: 10.0.0.0/16
 
+    PrivateSubnet1CIDR:
+        Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
+        Type: String
+        Default: 10.0.2.0/24
+
+    
     PublicSubnet1CIDR:
         Description: Please enter the IP range (CIDR notation) for the public subnet in the first Availability Zone
         Type: String
@@ -18,12 +24,7 @@ Parameters:
     PublicSubnet2CIDR:
         Description: Please enter the IP range (CIDR notation) for the public subnet in the second Availability Zone
         Type: String
-        Default: 10.0.1.0/24
-
-    PrivateSubnet1CIDR:
-        Description: Please enter the IP range (CIDR notation) for the private subnet in the first Availability Zone
-        Type: String
-        Default: 10.0.2.0/24
+        Default: 1
 
     PrivateSubnet2CIDR:
         Description: Please enter the IP range (CIDR notation) for the private subnet in the second Availability Zone
@@ -82,7 +83,7 @@ Resources:
           sudo apt-get install apache2 -y
           sudo systemctl start apache2.service          
       ImageId: ami-005bdb005fb00e791
-      #KeyName: that-one
+   
       SecurityGroups:
       - Ref: WebServerSecGroup
       InstanceType: t3.medium
