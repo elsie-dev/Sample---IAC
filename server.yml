@@ -81,7 +81,9 @@ Resources:
           #!/bin/bash
           sudo apt-get update -y
           sudo apt-get install apache2 -y
-          sudo systemctl start apache2.service          
+          sudo systemctl start apache2.service
+                    cd /var/www/html
+          echo "Awesome its running!" > index.html         
       ImageId: ami-005bdb005fb00e791
    
       SecurityGroups:
