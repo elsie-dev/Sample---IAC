@@ -2,7 +2,7 @@
 
 ## Task
 Using CloudFormation to deploy architectural patters to deploy any cloud application.
-Also included an infrastructure diagram for my application [Diagram](infrastructure diagram.PNG)
+Also included an infrastructure diagram for my application [](infrastructure diagram.PNG)
 
 ## Case Scenario
 <p>Your company is creating an Instagram clone called Udagram. Developers pushed the latest version of their code in a zip file located in a public S3 Bucket.You have been tasked with deploying the application, along with the necessary supporting software into its matching infrastructure.
