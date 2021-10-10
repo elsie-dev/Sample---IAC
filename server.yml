@@ -84,7 +84,7 @@ Resources:
             IamInstanceProfile: !Ref ProfileWithRolesForOurApp
             SecurityGroups:
             -   Ref: WebServerSecGroup
-            InstanceType: hvm-ssd
+            InstanceType: t3.medium
             BlockDeviceMappings:
             -   DeviceName: "/dev/xvda"
                 Ebs:
@@ -108,7 +108,7 @@ Resources:
         Type: AWS::AutoScaling::AutoScalingGroup
         Properties:
             VPCZoneIdentifier:  
-                -  Fn::ImportValue: !Sub ${EnvironmentName}-PRIV-NETS
+                -  Fn::ImportValue: !Sub "${EnvironmentName}-PRIV-NETS"
             LaunchConfigurationName:
                 Ref: WebAppLaunchConfig
             MinSize: '4'
@@ -121,7 +121,7 @@ Resources:
         Properties:
           Subnets:
             - Fn::ImportValue: !Sub "${EnvironmentName}-PUB1-SN"
-            #- Fn::ImportValue: !Sub "${EnvironmentName}-PUB2-SN"
+            - Fn::ImportValue: !Sub "${EnvironmentName}-PUB2-SN"
           SecurityGroups:
             - Ref: LoadBalancerSecGroup
             
@@ -155,4 +155,4 @@ Outputs:
         Description: DNS name or Public URL of the Load Balancer
         Value: !Join [ "", [ 'http://', !GetAtt WebAppLB.DNSName ]]
         Export:
-            Name: !Sub ${EnvironmentName}-WEB-APP-URL
+            Name: !Sub ${EnvironmentName}-WEB-APP
