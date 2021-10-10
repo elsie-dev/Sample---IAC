@@ -1,8 +1,12 @@
-[
-	{
-		"ParameterKey": "EnvironmentName",
-		"ParameterValue": "UdacityProjectSample"
-	}
-	  
 
-]
+	[
+		{
+			"ParameterKey": "EnvironmentName",
+			"ParameterValue": "UdagramProject"
+		},
+		{
+			"ParameterKey": "AMItoUse",
+			"ParameterValue": "ami-059b0cd2e3e244f86"
+		}
+	]
+	  

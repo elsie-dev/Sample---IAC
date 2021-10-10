@@ -1,21 +1,22 @@
 Parameters:
 
     EnvironmentName:
+        Description: An environment name that will be prefixed to resource names
         Type: String
     VpcCIDR:
-        Description: ip range(CIDR notation)
+        Description: Please enter the IP range (CIDR notation) for this
         Type: String        
     PublicSubnet1CIDR:
-        Description: ip range for subnet 1
+        Description: Please enter the IP range (CIDR notation) for the Subnet1
         Type: String        
-    PublicSubnet2CIDR: 
-        Description: ip range for subnet 2
+    PublicSubnet2CIDR:
+        Description: Please enter the IP range (CIDR notation) for the Subnet2
         Type: String                
     PrivateSubnet1CIDR:
-        Description: ip range for subnet 1
+        Description: Please enter the IP range (CIDR notation) for the Subnet1
         Type: String        
     PrivateSubnet2CIDR:
-        Description: ip range for subnet 2
+        Description: Please enter the IP range (CIDR notation) for the Subnet2
         Type: String        
 
 Resources:
@@ -72,7 +73,7 @@ Resources:
           Tags: 
               - Key: Name
                 Value: !Sub ${EnvironmentName} Public Subnet (AZ2)
-   #CREATING THE INTERNET GATEWAY
+
     InternetGateway: 
         Type: AWS::EC2::InternetGateway
 
@@ -105,7 +106,7 @@ Resources:
         Properties:
             AllocationId: !GetAtt NatGateway2EIP.AllocationId
             SubnetId: !Ref PublicSubnet2
-          #ROUTING TABLE 
+          
     PublicRouteTable:
         Type: AWS::EC2::RouteTable
         Properties: 
@@ -133,6 +134,7 @@ Resources:
         Properties:
             RouteTableId: !Ref PublicRouteTable
             SubnetId: !Ref PublicSubnet2
+            
     PrivateRouteTable1:
         Type: AWS::EC2::RouteTable
         Properties: 
@@ -176,49 +178,42 @@ Resources:
             SubnetId: !Ref PrivateSubnet2
   
 Outputs:
-   # VPC WITH PRIVATE AND PUBLIC SUBNETS
+
     VPC:
-        
+        Description: A reference to the created VPC
         Value: !Ref VPC
         Export:
             Name: !Sub ${EnvironmentName}-VPCID
 
     PublicSubnets:
-        
+        Description: A list of the public subnets
         Value: !Join [ ",", [ !Ref PublicSubnet1, !Ref PublicSubnet2 ]]
         Export:
             Name: !Sub ${EnvironmentName}-PUB-NETS
     PrivateSubnets:
-       
+        Description: A list of the private subnets
         Value: !Join [ ",", [ !Ref PrivateSubnet1, !Ref PrivateSubnet2 ]]
         Export:
             Name: !Sub ${EnvironmentName}-PRIV-NETS
 
     PublicSubnet1:
-        Description: Public Subnet in availability zone 1
+        Description: A reference to the public subnet in the 1st Availability Zone
         Value: !Ref PublicSubnet1
         Export:
             Name: !Sub ${EnvironmentName}-PUB1-SN
     PublicSubnet2:
-        Description: Public Subnet in availability zone 2
+        Description: A reference to the public subnet in the 2nd Availability Zone
         Value: !Ref PublicSubnet2
         Export:
             Name: !Sub ${EnvironmentName}-PUB2-SN
 
     PrivateSubnet1:
-        Description: Private Subnet in availability zone 1
+        Description: A reference to the private subnet in the 1st Availability Zone
         Value: !Ref PrivateSubnet1
         Export:
             Name: !Sub ${EnvironmentName}-PRI1-SN
     PrivateSubnet2:
-        Description: Public Subnet in availability zone 2
+        Description: A reference to the private subnet in the 2nd Availability Zone
         Value: !Ref PrivateSubnet2
         Export:
             Name: !Sub ${EnvironmentName}-PRI2-SN
-
- 
-
-
-
-        
-                
