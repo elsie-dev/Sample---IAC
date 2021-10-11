@@ -6,7 +6,7 @@ Parameters:
     AMItoUse:
         Description: Amazon Machine Image to use as the base image
         Type: String
-     #   # 059b0cd2e3e244f86
+
 
 Resources:
 
@@ -68,20 +68,20 @@ Resources:
                 ToPort: 65535
                 CidrIp: 0.0.0.0/0 #allows all ports to send outbound traffic
 
-    WebAppLaunchConfig: 
+    WebAppLaunchConfig:
         Type: AWS::AutoScaling::LaunchConfiguration
         Properties:
             UserData:
                 Fn::Base64: !Sub |
                     #!/bin/bash
-                    apt update -y
-                    apt install apache2 -y
-                    apt install unzip awscli -y
-                    systemctl start apache2
-                    systemctl enable apache2
-                   
-                   
-            ImageId: ami-02e136e904f3da870 
+                    apt-get update -y
+                    apt-get install unzip awscli -y
+                    apt-get install apache2 -y
+                    systemctl start apache2.service
+                    cd /var/www/html
+                    aws s3 cp s3://udacity-demo-1/udacity.zip .
+                    unzip -o udacity.zip
+            ImageId: ami-036490d46656c4818
             #KeyName: UdagramProject
             IamInstanceProfile: !Ref ProfileWithRolesForOurApp
             SecurityGroups:
@@ -110,7 +110,7 @@ Resources:
         Type: AWS::AutoScaling::AutoScalingGroup
         Properties:
             VPCZoneIdentifier:  
-                -  Fn::ImportValue: !Sub "${EnvironmentName}-PRIV-NETS"
+                -  Fn::ImportValue: !Sub ${EnvironmentName}-PRIV-NETS
             LaunchConfigurationName:
                 Ref: WebAppLaunchConfig
             MinSize: '4'
@@ -157,9 +157,4 @@ Outputs:
         Description: DNS name or Public URL of the Load Balancer
         Value: !Join [ "", [ 'http://', !GetAtt WebAppLB.DNSName ]]
         Export:
-            Name: !Sub ${EnvironmentName}-WEB-APP
-
-
-
-
-             #echo "Udacity Demo Web Server Up and Running!" > index.html
+            Name: !Sub ${EnvironmentName}-WEB-APP-URLs
