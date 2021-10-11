@@ -27,3 +27,4 @@ This needs to be done in an automated fashion so that the infrastructure can be 
  ```
  ./create.sh infrademo  infra.yml infra-parameters.json
  ```
+DNS URL: [serve-WebAp-2ME0ZN7KW805-1854610851.us-east-1.elb.amazonaws.com]()
