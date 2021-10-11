@@ -18,12 +18,12 @@ This needs to be done in an automated fashion so that the infrastructure can be 
 **BONUS** :Bonus points if you add http:// in front of the load balancer DNS Name
 
 ## Creating the CloudFormation Stack on AWS.
-
-
+ ### Using script to deploy server stack
+ ```
+ ./create.sh serverdemo  server.yml server.json
+ 
 ```
-aws cloudformation create-stack --stack-name sample2 --template-body file://server.yml --parameters file://server.json --region=us-east-1 
-```
-
-```
-aws cloudformation create-stack --stack-name Sample2 --template-body file://server.yml --parameters file://server.json --capabilities "CAPABILITY_IAM" "CAPABILITY_NAMED_IAM" --region=us-east-1 
-```
+ ### Using script to deploy infrastructure stack 
+ ```
+ ./create.sh infrademo  infra.yml infra-parameters.json
+ ```
