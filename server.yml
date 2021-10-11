@@ -74,12 +74,12 @@ Resources:
             UserData:
                 Fn::Base64: !Sub |
                     #!/bin/bash
-                    apt-get update -y
-                    apt-get install apache2 -y
-                    systemctl start apache2.service
-                    cd /var/www/html
-                    aws s3 cp s3://udacity-demo-1/udacity.zip .
-                    unzip -o udacity.zip
+                    apt update -y
+                    apt install apache2 -y
+                    apt install unzip awscli -y
+                    systemctl start apache2
+                    systemctl enable apache2
+                   
                    
             ImageId: ami-02e136e904f3da870 
             #KeyName: UdagramProject

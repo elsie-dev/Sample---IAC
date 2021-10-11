@@ -217,3 +217,8 @@ Outputs:
         Value: !Ref PrivateSubnet2
         Export:
             Name: !Sub ${EnvironmentName}-PRI2-SN
+
+
+
+        
+                
