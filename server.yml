@@ -6,7 +6,7 @@ Parameters:
     AMItoUse:
         Description: Amazon Machine Image to use as the base image
         Type: String
-
+     #   # 059b0cd2e3e244f86
 
 Resources:
 
@@ -78,8 +78,10 @@ Resources:
                     apt-get install apache2 -y
                     systemctl start apache2.service
                     cd /var/www/html
-                    echo "Udacity Demo Web Server Up and Running!" > index.html
-            ImageId: ami-059b0cd2e3e244f86
+                    aws s3 cp s3://udacity-demo-1/udacity.zip .
+                    unzip -o udacity.zip
+                   
+            ImageId: ami-02e136e904f3da870 
             #KeyName: UdagramProject
             IamInstanceProfile: !Ref ProfileWithRolesForOurApp
             SecurityGroups:
@@ -112,7 +114,7 @@ Resources:
             LaunchConfigurationName:
                 Ref: WebAppLaunchConfig
             MinSize: '4'
-            MaxSize: '4'
+            MaxSize: '6'
             TargetGroupARNs:
             -   Ref: WebAppTargetGroup
 
@@ -156,3 +158,8 @@ Outputs:
         Value: !Join [ "", [ 'http://', !GetAtt WebAppLB.DNSName ]]
         Export:
             Name: !Sub ${EnvironmentName}-WEB-APP
+
+
+
+
+             #echo "Udacity Demo Web Server Up and Running!" > index.html
